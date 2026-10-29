@@ -1,0 +1,26 @@
+rules_version = '2';
+
+// Só os dois e-mails abaixo podem ler e salvar os dados da viagem.
+// Troque pelos e-mails das contas Google de vocês e publique estas regras
+// no Firebase: Firestore Database → Regras → cole este conteúdo → Publicar.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function casal() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in [
+          'SEU_EMAIL@gmail.com',
+          'EMAIL_DA_ESPOSA@gmail.com'
+        ];
+    }
+
+    match /trips/{tripId}/{colecao}/{docId} {
+      allow read: if casal();
+      allow write: if casal()
+        && colecao in ['checks', 'calendar', 'hotels', 'hotelCustom']
+        && (request.resource == null || request.resource.data.size() <= 10);
+    }
+  }
+}

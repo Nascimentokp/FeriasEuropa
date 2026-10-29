@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Europa a Dois 2027</title>
+<meta name="description" content="Roteiro, hotéis, checklist e agenda da viagem de fevereiro de 2027.">
+<meta name="theme-color" content="#13223A">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>html{-webkit-text-size-adjust:100%}*,*::before,*::after{box-sizing:border-box}:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: cartão de embarque numa faixa noturna, mapa de linha férrea com estações, selos de passaporte por país, cada dia como um bilhete com canhoto */
+:root{
+  --bg:#EDF0F3; --surface:#FFFFFF; --ink:#16202B; --muted:#5D6B79; --line:#D3DAE1;
+  --accent:#1F4E79; --accent-soft:#DCE6F0;
+  --fr:#2B5BA8; --be:#B8860B; --nl:#D2691E; --home:#3C7D5A;
+  --done:#3C7D5A;
+  --sky:#DCE5EE; --glow:#EDB84A;
+  --hero:#13223A; --hero-ink:#EEF2F7; --hero-muted:#9FB0C6; --ticket:#FFFFFF;
+  --f-display:"Gloock", Georgia, "Times New Roman", serif;
+  --f-body:"Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F151C; --surface:#18212B; --ink:#E6ECF2; --muted:#93A1AF; --line:#2A3643;
+  --accent:#8DB5DD; --accent-soft:#1E2D3D;
+  --fr:#7FA3E0; --be:#E0B64A; --nl:#F0955A; --home:#73C094; --done:#73C094; --sky:#1F2B38; --glow:#D9A93F; --hero:#0A1220; --hero-ink:#EEF2F7; --hero-muted:#8FA0B6; --ticket:#1C2631; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F151C; --surface:#18212B; --ink:#E6ECF2; --muted:#93A1AF; --line:#2A3643;
+  --accent:#8DB5DD; --accent-soft:#1E2D3D;
+  --fr:#7FA3E0; --be:#E0B64A; --nl:#F0955A; --home:#73C094; --done:#73C094; --sky:#1F2B38; --glow:#D9A93F; --hero:#0A1220; --hero-ink:#EEF2F7; --hero-muted:#8FA0B6; --ticket:#1C2631; color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.inner{max-width:900px;margin:0 auto}
+.wrap{max-width:900px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:8px 64px;display:flex;flex-direction:column;gap:24px}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-wrap:balance;margin:0}
+h2{font-size:1.6rem}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* faixa noturna + cartão de embarque */
+.hero{background:var(--hero);color:var(--hero-ink);padding-block:32px 40px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto -10% -60px;height:120px;background:radial-gradient(ellipse at 50% 0,color-mix(in srgb,var(--glow) 22%,transparent),transparent 70%);pointer-events:none}
+.hero .inner{display:flex;flex-direction:column;gap:22px;position:relative;z-index:1}
+.hero .kicker{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--hero-muted)}
+.hero h1{font-size:clamp(2.6rem,8vw,4.4rem);line-height:.98;letter-spacing:-.01em}
+.hero p{margin:0;color:var(--hero-muted);max-width:56ch}
+.pass{display:grid;grid-template-columns:1fr auto;background:var(--ticket);color:var(--ink);border-radius:14px;box-shadow:0 18px 40px -18px rgba(0,0,0,.55);position:relative}
+.pass-main{padding:18px 22px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.pass-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.legs{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.code{font-family:var(--f-display);font-size:clamp(2rem,7vw,2.8rem);line-height:1}
+.code small{display:block;font-family:var(--f-body);font-size:.78rem;color:var(--muted);margin-top:4px}
+.plane{flex:1 1 60px;min-width:50px;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 11px);position:relative}
+.plane::after{content:"✈";position:absolute;left:50%;top:50%;transform:translate(-50%,-55%);font-size:1.1rem;color:var(--accent);background:var(--ticket);padding:0 6px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px 18px;border-top:1px dashed var(--line);padding-top:12px}
+.fields div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.fields b{font-weight:600;font-size:.95rem}
+.pass-stub{border-left:2px dashed var(--line);padding:18px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:2px;min-width:120px;position:relative}
+.pass-stub::before,.pass-stub::after{content:"";position:absolute;left:-12px;width:22px;height:22px;border-radius:50%;background:var(--hero)}
+.pass-stub::before{top:-11px}.pass-stub::after{bottom:-11px}
+.count-n{font-family:var(--f-display);font-size:3rem;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+@media (max-width:520px){.pass{grid-template-columns:1fr}.pass-stub{border-left:0;border-top:2px dashed var(--line);flex-direction:row;gap:10px;min-width:0}
+  .pass-stub::before,.pass-stub::after{top:-12px;left:auto}.pass-stub::before{left:-11px}.pass-stub::after{right:-11px;bottom:auto}.count-n{font-size:2.2rem}}
+
+/* mapa da linha */
+.routecard{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow-x:auto;margin-top:-18px;position:relative;z-index:2}
+.routecard h2{font-size:1.15rem;padding:16px 20px 0}
+.line{list-style:none;margin:0;padding:22px 20px 18px;display:grid;grid-template-columns:repeat(7,minmax(96px,1fr));min-width:700px}
+.line li{position:relative;display:flex;flex-direction:column;gap:3px;padding-top:26px;padding-right:8px}
+.line li::before{content:"";position:absolute;top:7px;left:0;right:0;height:6px;background:var(--c)}
+.line li:first-child::before{left:6px;border-radius:3px 0 0 3px}
+.line li:last-child::before{right:auto;width:14px;border-radius:0 3px 3px 0}
+.line li::after{content:"";position:absolute;top:0;left:0;width:14px;height:14px;border-radius:50%;background:var(--surface);border:4px solid var(--c)}
+.line .city{font-weight:600;line-height:1.2}
+.line .nights{font-size:.8rem;color:var(--muted)}
+.line .stamp{align-self:flex-start;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;color:var(--c);border:1px solid var(--c);border-radius:999px;padding:0 7px;margin-top:2px}
+
+/* abas fixas + progresso */
+.bar-wrap{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;display:flex;flex-direction:column;gap:10px;margin-inline:-4px;padding-inline:4px}
+nav{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px;overflow-x:auto;align-self:flex-start;max-width:100%}
+nav button{white-space:nowrap;font:inherit;font-weight:500;font-size:.95rem;background:none;border:0;border-radius:999px;color:var(--muted);padding:8px 16px;cursor:pointer}
+nav button[aria-selected="true"]{background:var(--accent);color:var(--surface)}
+nav button:focus-visible,.task input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.progress{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bar{flex:1 1 200px;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:var(--done);transition:width .4s}
+.progress .count{font-size:.85rem}
+.sync{font-size:.78rem;color:var(--muted)}
+.authbtn{font:inherit;font-size:.8rem;font-weight:600;border:1px solid var(--accent);color:var(--accent);background:var(--surface);border-radius:999px;padding:5px 12px;cursor:pointer}
+.authbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* roteiro: selo de passaporte por país */
+.country{display:flex;flex-direction:column;gap:14px;margin-bottom:34px}
+.chead{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.stampbox{display:inline-flex;flex-direction:column;align-items:center;gap:0;border:3px double var(--c);color:var(--c);border-radius:10px;padding:6px 14px;transform:rotate(-3deg);text-transform:uppercase}
+.stampbox .sc{font-family:var(--f-display);font-size:1.5rem;letter-spacing:.06em;line-height:1.1}
+.stampbox .sd{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em}
+.csum{color:var(--muted);font-size:.95rem;min-width:0}
+.days{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+
+/* dia = bilhete com canhoto */
+.card{display:grid;grid-template-columns:78px 1fr;background:var(--surface);border:1px solid var(--line);border-radius:12px;min-width:0;position:relative}
+.stub{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:16px 6px;border-right:2px dashed var(--line);background:color-mix(in srgb,var(--c) 10%,var(--surface));border-radius:12px 0 0 12px;position:relative}
+.stub::before,.stub::after{content:"";position:absolute;right:-9px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:1px solid var(--line)}
+.stub::before{top:-8px;clip-path:inset(50% 0 0 0)}.stub::after{bottom:-8px;clip-path:inset(0 0 50% 0)}
+.stub .wd{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
+.stub .dn{font-family:var(--f-display);font-size:2.3rem;line-height:1;font-variant-numeric:tabular-nums}
+.stub .mo{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;color:var(--muted)}
+.cbody{padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.day h3{font-size:1.35rem}
+.move{margin:0;font-size:.9rem;padding:9px 12px;border-radius:8px;background:var(--accent-soft);color:var(--ink);display:flex;gap:10px;align-items:baseline}
+.move b{flex:none;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.blocks{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0}
+.blocks dt{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--c);padding-top:3px}
+.blocks dd{margin:0;min-width:0}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px 18px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:12px}
+.meta span{display:block;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tip{font-size:.9rem;color:var(--muted);margin:0}
+.tip::before{content:"Dica · ";font-weight:600;color:var(--ink)}
+@media (max-width:480px){.card{grid-template-columns:62px 1fr}.stub .dn{font-size:1.9rem}.blocks{grid-template-columns:1fr;gap:2px}.blocks dd{margin-bottom:8px}.move{flex-direction:column;gap:2px}}
+
+/* checklist como etiquetas de bagagem */
+.group{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px 12px;display:flex;flex-direction:column;gap:4px;position:relative}
+.group::before{content:"";position:absolute;top:14px;right:16px;width:10px;height:10px;border-radius:50%;border:2px solid var(--line)}
+.group h3{font-size:1.2rem;display:flex;flex-direction:column;gap:2px;padding-right:24px}
+.group h3 span{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:14px}
+.task{display:flex;gap:10px;align-items:flex-start;padding:7px 0;cursor:pointer;border-top:1px dashed var(--line)}
+.task:first-of-type{border-top:0}
+.task input{width:18px;height:18px;margin-top:2px;accent-color:var(--done);flex:none;cursor:pointer}
+.task.on .label{color:var(--muted);text-decoration:line-through}
+
+/* trens como quadro de partidas */
+.tablebox{overflow-x:auto;background:var(--hero);color:var(--hero-ink);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:580px;font-size:.95rem}
+th,td{text-align:left;padding:11px 16px;border-bottom:1px solid color-mix(in srgb,var(--hero-ink) 14%,transparent);vertical-align:top}
+th{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--glow);font-weight:500}
+td.mono{color:var(--glow)}
+tr:last-child td{border-bottom:0}
+.pill{display:inline-block;font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--glow);color:var(--hero)}
+.pill.no{background:transparent;color:var(--hero-muted);border:1px solid color-mix(in srgb,var(--hero-ink) 25%,transparent)}
+.notes{display:flex;flex-direction:column;gap:10px;margin:0;padding-left:18px}
+/* calendário */
+.calwrap{display:flex;flex-direction:column;gap:12px}
+.calhead{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend span::before{content:"";width:12px;height:12px;border-radius:3px;background:var(--c)}
+.calhint{margin:0;font-size:.9rem;color:var(--muted)}
+.calscroll{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(88px,1fr));min-width:640px}
+.cal .dow{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:10px 8px;border-bottom:1px solid var(--line)}
+.cal .cell{font:inherit;text-align:left;background:none;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:96px;padding:8px;display:flex;flex-direction:column;gap:4px;color:var(--ink);cursor:pointer;position:relative;min-width:0}
+.cal .cell:nth-child(7n){border-right:0}
+.cal .cell.trip{background:color-mix(in srgb,var(--c) 14%,var(--surface));box-shadow:inset 0 3px 0 var(--c)}
+.cal .cell.out{color:var(--muted)}
+.cal .cell:hover{background:color-mix(in srgb,var(--accent) 8%,var(--surface))}
+.cal .cell.trip:hover{background:color-mix(in srgb,var(--c) 24%,var(--surface))}
+.cal .cell[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:-2px}
+.cal .cell:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.cal .num{font-family:var(--f-mono);font-size:.85rem;font-variant-numeric:tabular-nums}
+.cal .city{font-weight:600;font-size:.88rem;line-height:1.2;overflow-wrap:anywhere}
+.cal .plan{font-size:.78rem;color:var(--muted);line-height:1.25;overflow-wrap:anywhere}
+.cal .dot{position:absolute;top:9px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.editor{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.edhead{display:flex;gap:10px;align-items:center}
+.edited{font-size:.72rem;font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:999px}
+.edgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+.edgrid .wide{grid-column:1/-1}
+.edgrid label{display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:var(--muted)}
+.edgrid input,.edgrid select{font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;min-width:0}
+.edgrid input:focus-visible,.edgrid select:focus-visible,.edbtns button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.edbtns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.edbtns button{font:inherit;font-weight:500;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;padding:8px 14px;cursor:pointer}
+.edbtns .primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.edmsg{font-size:.85rem;color:var(--muted)}
+/* tela Hoje */
+nav button{display:inline-flex;align-items:center;gap:8px}
+nav button svg{flex:none}
+.today{display:flex;flex-direction:column;gap:16px}
+.thead{display:flex;flex-direction:column;gap:4px}
+.thead h2{font-size:clamp(1.6rem,5vw,2.1rem)}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.tile h3{font-size:1.15rem}
+.tile .big{font-family:var(--f-display);font-size:2.6rem;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.tile .go{font:inherit;font-weight:600;font-size:.9rem;align-self:flex-start;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 14px;cursor:pointer;margin-top:auto}
+.tile .go:focus-visible,.install button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tile .tasks{display:flex;flex-direction:column}
+.tile .empty{color:var(--muted);font-size:.92rem;margin:0}
+.minibar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.minibar span{display:block;height:100%;background:var(--done)}
+.install{background:var(--accent-soft);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;font-size:.92rem}
+.install b{font-size:1rem}
+.install ol{margin:0;padding-left:18px}
+.install button{align-self:flex-start;font:inherit;font-size:.85rem;background:none;border:0;color:var(--accent);text-decoration:underline;cursor:pointer;padding:0}
+.next{display:flex;flex-direction:column;gap:2px;font-size:.92rem}
+
+/* modo aplicativo no celular */
+@media (max-width:720px){
+  .hero{padding-block:20px 34px}
+  .hero p{display:none}
+  .hero h1{font-size:2.4rem}
+  .wrap{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  nav{position:fixed;left:0;right:0;bottom:0;z-index:20;border-radius:0;border:0;border-top:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(6,1fr);gap:0;align-self:auto;max-width:none;overflow:visible;
+    padding:6px max(4px,env(safe-area-inset-left,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(4px,env(safe-area-inset-right,0px));
+    background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  nav button{flex-direction:column;gap:3px;font-size:.68rem;padding:6px 2px;border-radius:10px;min-width:0}
+  nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accent)}
+  .bar-wrap{padding-block:8px}
+}
+
+/* hotéis */
+.hwrap{display:flex;flex-direction:column;gap:18px}
+.hsummary{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.hsummary > div:first-child{min-width:0;max-width:60ch;display:flex;flex-direction:column;gap:6px}
+.hcount{display:flex;flex-direction:column;align-items:flex-end}
+.hcount .count-n{font-size:2.6rem}
+.hpicks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px}
+.hpicks li{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:8px;padding:8px 12px;display:flex;flex-direction:column;gap:1px;min-width:0}
+.hpicks .pk{font-weight:600;overflow-wrap:anywhere}
+.hpicks .pk.none{color:var(--muted);font-weight:400;font-style:italic}
+.hstay{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.hhead{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hhead .why{color:var(--muted);font-size:.92rem;min-width:0;flex:1 1 260px}
+.hgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px}
+.hcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;position:relative;min-width:0}
+.hcard.mine{border-style:dashed;border-color:var(--c)}
+.hcard.on{border:2px solid var(--c);padding:15px;background:color-mix(in srgb,var(--c) 7%,var(--surface))}
+.hcard .tier{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.hcard .tier span:first-child{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
+.hcard .tier .money{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.hcard h4{margin:0;font-family:var(--f-display);font-weight:400;font-size:1.25rem;line-height:1.15;overflow-wrap:anywhere}
+.hcard .area{font-size:.85rem;color:var(--muted)}
+.hcard p{margin:0;font-size:.92rem}
+.hcard .price{font-size:.85rem;color:var(--ink)}
+.hcard .price b{font-family:var(--f-mono);font-weight:500}
+.hlinks{display:flex;gap:12px;flex-wrap:wrap;font-size:.85rem;margin-top:auto;padding-top:4px}
+.hlinks a{color:var(--accent);text-underline-offset:3px}
+.hpick{font:inherit;font-weight:600;font-size:.9rem;border:1px solid var(--c);color:var(--c);background:transparent;border-radius:999px;padding:8px 14px;cursor:pointer;align-self:flex-start}
+.hcard.on .hpick{background:var(--c);color:var(--surface)}
+.hpick:focus-visible,.hlinks a:focus-visible,.hadd button:focus-visible,.hrm:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hstampon{position:absolute;top:12px;right:12px;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--c);border:2px solid var(--c);border-radius:6px;padding:2px 6px;transform:rotate(6deg)}
+.hcard.on .tier .money{visibility:hidden}
+.hrm{font:inherit;font-size:.8rem;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0;align-self:flex-start}
+.hadd{display:flex;flex-direction:column;gap:8px}
+.hadd summary{cursor:pointer;color:var(--accent);font-weight:500;font-size:.92rem}
+.hadd form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px;align-items:end;margin-top:8px}
+.hadd label{display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:var(--muted)}
+.hadd input{font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;min-width:0}
+.hadd button{font:inherit;font-weight:600;border:0;background:var(--accent);color:var(--surface);border-radius:6px;padding:9px 14px;cursor:pointer}
+.hmsg{font-size:.85rem;color:var(--muted);min-height:1.2em}
+.hnote{font-size:.85rem;color:var(--muted);margin:8px 0 0}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+</style>
+</head>
+<body>
+
+
+<section class="hero gut">
+  <div class="inner">
+    <div>
+      <div class="kicker">Roteiro de inverno · trem por 3 países</div>
+      <h1>Europa a Dois</h1>
+    </div>
+    <p>Mont Saint-Michel, Bélgica e Holanda de trem, com uma noite extra em Paris na volta do Mont. Marquem o checklist juntos: o que um marca, o outro vê.</p>
+    <div class="pass" aria-label="Resumo da viagem">
+      <div class="pass-main">
+        <div class="pass-top"><span class="eyebrow">Cartão de embarque</span><span class="eyebrow">Classe: casal</span></div>
+        <div class="legs">
+          <div class="code">FOR<small>Fortaleza</small></div>
+          <div class="plane" aria-hidden="true"></div>
+          <div class="code">CDG<small>Paris</small></div>
+        </div>
+        <div class="fields">
+          <div><span class="eyebrow">Ida</span><b class="mono">05 FEV 2027</b></div>
+          <div><span class="eyebrow">Chegada</span><b class="mono">06 FEV · 10h30</b></div>
+          <div><span class="eyebrow">Volta</span><b class="mono">21 FEV 2027</b></div>
+          <div><span class="eyebrow">Noites</span><b class="mono">16</b></div>
+        </div>
+      </div>
+      <div class="pass-stub">
+        <span class="eyebrow">Faltam</span>
+        <span class="count-n" id="countdown">—</span>
+        <span class="eyebrow">dias</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="routecard" aria-label="Rota da viagem">
+    <h2>A linha da viagem</h2>
+    <ol class="line">
+      <li style="--c:var(--fr)"><span class="eyebrow">6 fev</span><span class="city">Paris</span><span class="nights">chegada 10h30</span><span class="stamp">1 noite</span></li>
+      <li style="--c:var(--fr)"><span class="eyebrow">7–8 fev</span><span class="city">Mont Saint-Michel</span><span class="nights">abadia e marés</span><span class="stamp">2 noites</span></li>
+      <li style="--c:var(--fr)"><span class="eyebrow">9 fev</span><span class="city">Paris</span><span class="nights">tarde livre</span><span class="stamp">1 noite</span></li>
+      <li style="--c:var(--be)"><span class="eyebrow">10–12 fev</span><span class="city">Bruxelas</span><span class="nights">+ Ghent</span><span class="stamp">3 noites</span></li>
+      <li style="--c:var(--be)"><span class="eyebrow">13–14 fev</span><span class="city">Bruges</span><span class="nights">Dia dos Namorados</span><span class="stamp">2 noites</span></li>
+      <li style="--c:var(--nl)"><span class="eyebrow">15–19 fev</span><span class="city">Amsterdã</span><span class="nights">+ moinhos</span><span class="stamp">5 noites</span></li>
+      <li style="--c:var(--home)"><span class="eyebrow">20–21 fev</span><span class="city">Paris → FOR</span><span class="nights">voo dia 21</span><span class="stamp">1 noite</span></li>
+    </ol>
+  </div>
+
+  <div class="bar-wrap">
+    <nav role="tablist" aria-label="Seções">
+      <button role="tab" id="tab-hoje" aria-selected="true" data-view="hoje"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>Hoje</span></button>
+      <button role="tab" id="tab-roteiro" aria-selected="false" data-view="roteiro"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></svg><span>Roteiro</span></button>
+      <button role="tab" id="tab-hoteis" aria-selected="false" data-view="hoteis"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20V8M3 14h18v6M21 20v-6a3 3 0 0 0-3-3h-7v3"/><circle cx="7" cy="11" r="2"/></svg><span>Hotéis</span></button>
+      <button role="tab" id="tab-checklist" aria-selected="false" data-view="checklist"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 9 2 2 4-4M8 15h8"/></svg><span>Checklist</span></button>
+      <button role="tab" id="tab-trens" aria-selected="false" data-view="trens"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M9 21l-2 0 2-4M15 21h2l-2-4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/></svg><span>Trens</span></button>
+      <button role="tab" id="tab-calendario" aria-selected="false" data-view="calendario"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Agenda</span></button>
+    </nav>
+    <div class="progress">
+      <div class="bar" role="progressbar" aria-label="Progresso do checklist" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="barfill"></span></div>
+      <span class="count mono" id="count">0 de 0 tarefas</span>
+      <span class="sync" id="sync">Conectando…</span>
+      <button type="button" class="authbtn" id="authbtn" hidden>Entrar com Google</button>
+    </div>
+  </div>
+
+  <section id="hoje"></section>
+  <section id="roteiro" hidden></section>
+  <section id="hoteis" hidden>
+    <div class="hwrap">
+      <div class="hsummary">
+        <div><h2>Onde vamos dormir</h2><p class="calhint">Três sugestões por parada, do mais em conta ao especial. Escolham um em cada cidade: a escolha aparece para os dois.</p></div>
+        <div class="hcount"><span class="count-n mono" id="hcount">0/7</span><span class="eyebrow">escolhidos</span></div>
+      </div>
+      <ol class="hpicks" id="hpicks"></ol>
+      <div id="hstays"></div>
+      <p class="hnote">Preços "a partir de" são referências atuais de sites de reserva para um quarto e uma noite, e mudam com a data. O botão "Preço nas datas" já abre a busca com o check-in e o check-out da viagem.</p>
+    </div>
+  </section>
+  <section id="checklist" hidden><div class="groups" id="groups"></div></section>
+  <section id="trens" hidden>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div class="tablebox">
+        <table>
+          <thead><tr><th>Data</th><th>Trecho</th><th>Como</th><th>Reservar antes</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">06/02</td><td>CDG → hotel em Paris</td><td>RER B ou táxi</td><td><span class="pill no">Não</span></td></tr>
+            <tr><td class="mono">07/02</td><td>Paris → Mont Saint-Michel</td><td>TGV até Rennes + ônibus (ou via Pontorson)</td><td><span class="pill">Sim</span></td></tr>
+            <tr><td class="mono">09/02</td><td>Mont Saint-Michel → Paris</td><td>Ônibus a Rennes + TGV a Montparnasse</td><td><span class="pill">Sim</span></td></tr>
+            <tr><td class="mono">10/02</td><td>Paris → Bruxelas</td><td>Eurostar Gare du Nord → Bruxelas-Midi (cerca de 1h20)</td><td><span class="pill">Sim</span></td></tr>
+            <tr><td class="mono">12/02</td><td>Bruxelas ↔ Ghent</td><td>Trem regional, ida e volta (cerca de 35 min)</td><td><span class="pill no">Não</span></td></tr>
+            <tr><td class="mono">13/02</td><td>Bruxelas → Bruges</td><td>Trem intercidades (cerca de 1h)</td><td><span class="pill no">Não</span></td></tr>
+            <tr><td class="mono">15/02</td><td>Bruges → Antuérpia → Amsterdã</td><td>Trem a Antuérpia (cerca de 1h30) + Eurostar a Amsterdã (cerca de 1h15)</td><td><span class="pill">Sim</span></td></tr>
+            <tr><td class="mono">18/02</td><td>Amsterdã ↔ Zaanse Schans / Haarlem</td><td>Trem regional</td><td><span class="pill no">Não</span></td></tr>
+            <tr><td class="mono">19/02</td><td>Amsterdã ↔ Rotterdam + Kinderdijk</td><td>Trem (cerca de 40 min) + waterbus (cerca de 30 min)</td><td><span class="pill no">Não</span></td></tr>
+            <tr><td class="mono">20/02</td><td>Amsterdã → Paris</td><td>Trem internacional</td><td><span class="pill">Sim</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>Dicas de inverno</h2>
+      <ul class="notes">
+        <li><strong>Dias curtos.</strong> Escurece por volta das 17h30–18h. Passeios ao ar livre no meio do dia; museus e cafés no fim da tarde.</li>
+        <li><strong>Mont Saint-Michel.</strong> Vale mais com noite por perto do que em bate-volta de Paris.</li>
+        <li><strong>Tulipas.</strong> Ainda não é época; a temporada e o Keukenhof começam em março.</li>
+        <li><strong>Carnaval.</strong> Em 2027 cai de 7 a 9/02, com festas no sul da Holanda e na Bélgica. Trens podem estar mais cheios no dia 9.</li>
+        <li><strong>Hotéis.</strong> Prefiram tarifas com cancelamento grátis até fechar os horários dos trens.</li>
+      </ul>
+    </div>
+  </section>
+  <section id="calendario" hidden>
+    <div class="calwrap">
+      <div class="calhead">
+        <h2>Fevereiro de 2027</h2>
+        <div class="legend">
+          <span style="--c:var(--fr)">França</span><span style="--c:var(--be)">Bélgica</span><span style="--c:var(--nl)">Holanda</span><span style="--c:var(--home)">Voo / retorno</span>
+        </div>
+      </div>
+      <p class="calhint">Toque num dia para mudar a cidade ou o plano. A alteração fica salva para vocês dois.</p>
+      <div class="calscroll"><div class="cal" id="cal" role="grid" aria-label="Calendário de fevereiro de 2027"></div></div>
+      <form class="editor" id="editor" hidden>
+        <div class="edhead"><strong id="ed-title">Editar dia</strong><span class="edited" id="ed-flag" hidden>editado</span></div>
+        <div class="edgrid">
+          <label for="ed-city">Cidade<input id="ed-city" maxlength="40" autocomplete="off"></label>
+          <label for="ed-country">País<select id="ed-country">
+            <option value="fr">França</option><option value="be">Bélgica</option><option value="nl">Holanda</option><option value="home">Voo / retorno</option><option value="none">Livre</option></select></label>
+          <label for="ed-plan" class="wide">Plano do dia<input id="ed-plan" maxlength="80" autocomplete="off"></label>
+        </div>
+        <div class="edbtns">
+          <button type="submit" class="primary" id="ed-save">Salvar</button>
+          <button type="button" id="ed-reset">Voltar ao original</button>
+          <button type="button" id="ed-cancel">Fechar</button>
+          <span class="edmsg" id="ed-msg" role="status"></span>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<script>
+const ITINERARY = [
+  {country:"França", range:"6–9 fev", c:"--fr", days:[
+    {d:"Sáb 6/02", t:"Chegada a Paris",
+     move:"CDG → centro: RER B (cerca de 40 min) ou táxi com tarifa fixa",
+     blocks:[["Manhã","Desembarque às 10h30, imigração e bagagens. Comprar um bilhete do RER B na estação do aeroporto."],
+             ["Tarde","Check-in ou deixar as malas. Almoço leve e um cochilo curto para vencer o fuso."],
+             ["Noite","Passeio sem compromisso pelo bairro do hotel e jantar cedo. Dormir cedo: o trem sai de manhã."]],
+     eat:"Bistrô de bairro: croque-monsieur, sopa de cebola, crème brûlée",
+     sleep:"Perto da Gare Montparnasse, de onde sai o trem para Rennes no dia seguinte",
+     tip:"Deixem a roupa de frio na bagagem de mão: em fevereiro Paris fica entre 3 °C e 8 °C."},
+    {d:"Dom 7/02", t:"Paris → Normandia",
+     move:"TGV Montparnasse → Rennes (cerca de 1h30) + ônibus Rennes → Mont Saint-Michel (cerca de 1h10)",
+     blocks:[["Manhã","Trem cedo para Rennes. O ônibus para o Mont sai ao lado da estação; confiram o horário dele antes de escolher o trem."],
+             ["Tarde","Check-in em La Caserne, a área de hotéis no continente. Primeiro olhar no monte pela passarela, a pé ou na navete gratuita."],
+             ["Noite","Voltem ao entardecer para ver o monte iluminado de longe. Jantar no próprio hotel ou em La Caserne."]],
+     eat:"Crepes e galettes, cidra normanda, cordeiro de pré-salé da baía",
+     sleep:"La Caserne (hotéis a poucos minutos da navete) ou Beauvoir/Pontorson, mais baratos",
+     tip:"No inverno os ônibus são poucos por dia: um atraso de trem pode custar horas de espera."},
+    {d:"Seg 8/02", t:"Mont Saint-Michel",
+     move:"Navete gratuita entre La Caserne e o monte (cerca de 12 min)",
+     blocks:[["Manhã","Subir cedo à abadia, antes dos grupos (abre às 9h30 na baixa temporada). A visita leva cerca de 1h30."],
+             ["Tarde","Grande Rue, muralhas e jardins. Conferir a tabela de marés e ver a água subir da muralha norte."],
+             ["Noite","Fotos do monte iluminado da passarela. Jantar sem pressa e preparar as malas."]],
+     eat:"A famosa omelete da Mère Poulard (cara, vale como experiência) e biscoitos amanteigados",
+     sleep:"Mesma hospedagem da noite anterior",
+     tip:"Caminhar pela areia da baía só com guia credenciado: as marés sobem rápido e há areia movediça."},
+    {d:"Ter 9/02", t:"Mont Saint-Michel → Paris",
+     move:"Ônibus a Rennes (cerca de 1h10) + TGV Rennes → Paris Montparnasse (cerca de 1h30)",
+     blocks:[["Manhã","Primeiro ônibus para Rennes e TGV para Paris. Chegada a Montparnasse por volta do almoço."],
+             ["Tarde","Check-in perto da Gare du Nord. Museu d'Orsay (aberto às terças) ou passeio pelo Marais."],
+             ["Noite","Pôr do sol em Montmartre ou no Trocadéro (por volta das 18h) e cruzeiro pelo Sena com a cidade iluminada."]],
+     eat:"Jantar num bistrô do Marais: confit de pato e uma taça de vinho",
+     sleep:"Perto da Gare du Nord, de onde sai o Eurostar na manhã seguinte",
+     tip:"O Louvre fecha às terças: este é o dia do Orsay. Comprem o ingresso online para evitar a fila."}
+  ]},
+  {country:"Bélgica", range:"10–14 fev", c:"--be", days:[
+    {d:"Qua 10/02", t:"Paris → Bruxelas",
+     move:"Eurostar Gare du Nord → Bruxelas-Midi (cerca de 1h20)",
+     blocks:[["Manhã","Eurostar pela manhã e check-in em Bruxelas."],
+             ["Tarde","Grand-Place, Manneken Pis e Galeries Royales Saint-Hubert."],
+             ["Noite","Bairro Sainte-Catherine para jantar e um bar de cervejas tradicionais."]],
+     eat:"Moules-frites e uma cerveja trapista",
+     sleep:"Centro histórico ou perto da estação Bruxelas-Central",
+     tip:"Cheguem ao Eurostar 45 a 60 min antes: há controle de segurança antes do embarque."},
+    {d:"Qui 11/02", t:"Bruxelas sem pressa",
+     move:"A pé e de metrô",
+     blocks:[["Manhã","Monte das Artes e Museu Magritte ou Museus Reais de Belas Artes."],
+             ["Tarde","Bairro do Sablon: antiquários, igreja Notre-Dame du Sablon e as grandes chocolaterias da praça. Palácio Real e Parque de Bruxelas."],
+             ["Noite","Grand-Place iluminada e jantar num restaurante belga tradicional."]],
+     eat:"Waffle de Bruxelas, chocolates do Sablon e stoemp (purê com legumes)",
+     sleep:"Bruxelas",
+     tip:"Os museus belgas costumam fechar às segundas; nesta quinta estão abertos."},
+    {d:"Sex 12/02", t:"Bate-volta a Ghent",
+     move:"Trem Bruxelas → Ghent Sint-Pieters (cerca de 35 min) + bonde até o centro",
+     blocks:[["Manhã","Castelo Gravensteen."],
+             ["Tarde","Catedral de São Bavão, com o retábulo dos irmãos Van Eyck, e os cais Graslei e Korenlei."],
+             ["Noite","Ghent fica linda iluminada: jantem lá e voltem de trem depois."]],
+     eat:"Gentse waterzooi (ensopado cremoso) e cuberdons, a bala local em forma de cone",
+     sleep:"Bruxelas; arrumar as malas para Bruges",
+     tip:"Comprem os bilhetes de trem regionais na hora, pelo app da SNCB."},
+    {d:"Sáb 13/02", t:"Bruxelas → Bruges",
+     move:"Trem intercidades Bruxelas → Bruges (cerca de 1h)",
+     blocks:[["Manhã","Trem para Bruges e check-in no centro histórico."],
+             ["Tarde","Markt e Burg, com subida ao campanário para ver a cidade de cima."],
+             ["Noite","Caminhada pelos canais iluminados, quando a cidade fica vazia. É o melhor momento de Bruges."]],
+     eat:"Carbonnade flamande (carne cozida na cerveja) com frites",
+     sleep:"Dentro do anel de canais, perto do Markt ou do Rozenhoedkaai",
+     tip:"Dormir em Bruges é o que faz a diferença: os grupos de excursão vão embora no fim da tarde."},
+    {d:"Dom 14/02", t:"Bruges e Dia dos Namorados",
+     move:"A pé",
+     blocks:[["Manhã","Begijnhof e o lago Minnewater, o \"lago do amor\", com pouca gente."],
+             ["Tarde","Passeio de barco pelos canais, se estiver operando, ou o Museu Groeninge, com pintores flamengos."],
+             ["Noite","Jantar romântico de Dia dos Namorados, reservado com antecedência."]],
+     eat:"Chocolate quente espesso numa das chocolaterias da cidade",
+     sleep:"Bruges",
+     tip:"No domingo de Dia dos Namorados os restaurantes lotam: reservem semanas antes."}
+  ]},
+  {country:"Holanda", range:"15–19 fev", c:"--nl", days:[
+    {d:"Seg 15/02", t:"Bruges → Antuérpia → Amsterdã",
+     move:"Trem Bruges → Antuérpia (cerca de 1h30) + Eurostar Antuérpia → Amsterdã (cerca de 1h15)",
+     blocks:[["Manhã","Trem para Antuérpia e malas no guarda-volumes da estação."],
+             ["Tarde","Estação Centraal, uma das mais bonitas da Europa, a Grote Markt e a catedral. Trem para Amsterdã no fim da tarde."],
+             ["Noite","Check-in em Amsterdã e jantar no bairro do hotel."]],
+     eat:"Em Antuérpia, provem as frites de um quiosque da Groenplaats",
+     sleep:"Jordaan ou cinturão de canais; De Pijp fica perto dos museus",
+     tip:"Se quiserem um dia mais leve, pulem Antuérpia: Bruges → Bruxelas → Amsterdã leva cerca de 3 horas."},
+    {d:"Ter 16/02", t:"Amsterdã histórica",
+     move:"A pé e de bonde",
+     blocks:[["Manhã","Praça Dam, Palácio Real e Begijnhof."],
+             ["Tarde","Canais Prinsengracht, Keizersgracht e Herengracht, com passeio de barco coberto, e as Nove Ruas."],
+             ["Noite","Jordaan: ruas estreitas, cafés marrons e jantar no bairro."]],
+     eat:"Bitterballen com mostarda num café marrom e torta de maçã holandesa",
+     sleep:"Amsterdã",
+     tip:"Casa de Anne Frank: ingressos só online, liberados semanas antes."},
+    {d:"Qua 17/02", t:"Museus",
+     move:"Bonde até a Museumplein",
+     blocks:[["Manhã","Rijksmuseum: 9h às 17h, ingresso €27 com horário marcado. Reservem pelo menos 2h30."],
+             ["Tarde","Museu Van Gogh: €27, só online e com horário. Cerca de 1h30 de visita."],
+             ["Noite","Jantar em De Pijp, ao lado da Museumplein."]],
+     eat:"Mercado Albert Cuyp em De Pijp: stroopwafel feita na hora",
+     sleep:"Amsterdã",
+     tip:"Reservem o Van Gogh com 5 a 6 semanas de antecedência: não vendem na porta."},
+    {d:"Qui 18/02", t:"Zaanse Schans e Haarlem",
+     move:"Trem Amsterdam Centraal → Zaandijk Zaanse Schans (menos de 40 min); depois trem para Haarlem (cerca de 45 min, com uma troca)",
+     blocks:[["Manhã","Zaanse Schans cedo, quando a vila está vazia: os moinhos de madeira verde à beira do rio Zaan. Entrem nos que abrem no inverno, como De Kat e De Bonte Hen."],
+             ["Tarde","Haarlem: Grote Markt, igreja de São Bavo e o moinho De Adriaan à beira do rio."],
+             ["Noite","Volta a Amsterdã (cerca de 15 min) e noite livre."]],
+     eat:"Queijo gouda envelhecido na queijaria da Zaanse Schans e chocolate quente",
+     sleep:"Amsterdã",
+     tip:"No inverno só alguns moinhos abrem por dentro. O Ticket Zaanse Schans dá acesso a vários moinhos e ao Zaans Museum."},
+    {d:"Sex 19/02", t:"Rotterdam e os moinhos de Kinderdijk",
+     move:"Trem Amsterdam Centraal → Rotterdam Centraal (cerca de 40 min) + waterbus linha 20 até Kinderdijk (cerca de 30 min)",
+     blocks:[["Manhã","Kinderdijk: 19 moinhos do século XVIII ao longo dos canais, patrimônio da UNESCO. Ingresso de cerca de €21."],
+             ["Tarde","Volta a Rotterdam: Markthal, Casas Cubo e ponte Erasmus."],
+             ["Noite","Volta a Amsterdã, jantar de despedida e malas prontas."]],
+     eat:"Almoço nas barracas da Markthal",
+     sleep:"Amsterdã",
+     tip:"No inverno o waterbus pode exigir troca em Ridderkerk: confiram o horário. Se preferirem uma cidade antiga a moinhos, troquem por Utrecht (27 min de trem)."}
+  ]},
+  {country:"Retorno", range:"20–21 fev", c:"--home", days:[
+    {d:"Sáb 20/02", t:"Amsterdã → Paris",
+     move:"Eurostar Amsterdam Centraal → Paris Nord (cerca de 3h15, a partir de €35 comprando cedo)",
+     blocks:[["Manhã","Trem pela manhã."],
+             ["Tarde","Check-in perto do aeroporto ou da Gare du Nord. Um último passeio em Paris se der tempo."],
+             ["Noite","Jantar de despedida e documentos separados para o voo."]],
+     eat:"Uma última baguete e queijos para o caminho",
+     sleep:"Gare du Nord (RER B direto para o CDG) ou hotel no próprio aeroporto",
+     tip:"Escolham o trem mais cedo que for confortável: dá margem para qualquer atraso."},
+    {d:"Dom 21/02", t:"Paris → Fortaleza",
+     move:"RER B ou transfer até o CDG",
+     blocks:[["Manhã","Check-out e chegada ao aeroporto 3 horas antes do voo."],
+             ["Tarde","Voo para casa."]],
+     eat:"",
+     sleep:"",
+     tip:"Peçam a restituição de impostos (détaxe) das compras no aeroporto, se tiverem direito."}
+  ]}
+];
+
+const CHECKLIST = [
+  {g:"Documentos e seguro", when:"até dezembro", tasks:[
+    ["doc-passagens","Conferir passagens e nomes dos passageiros"],
+    ["doc-passaportes","Passaportes válidos e requisitos de entrada"],
+    ["doc-seguro","Contratar seguro-viagem"],
+    ["doc-dinheiro","Cartões, euro em espécie e chip ou eSIM"],
+    ["doc-banco","Avisar o banco sobre a viagem"]]},
+  {g:"Hospedagens", when:"7 reservas", tasks:[
+    ["hot-paris1","Paris — noite de 6/02"],
+    ["hot-mont","Perto do Mont Saint-Michel — 7 e 8/02"],
+    ["hot-paris-meio","Paris, perto da Gare du Nord — 9/02"],
+    ["hot-bru","Bruxelas — 10 a 12/02"],
+    ["hot-bruges","Bruges, dentro dos canais — 13 e 14/02"],
+    ["hot-ams","Amsterdã — 15 a 19/02"],
+    ["hot-paris2","Paris, perto do aeroporto — 20/02"]]},
+  {g:"Transportes", when:"reservar cedo", tasks:[
+    ["tr-mont","Paris → Rennes + ônibus ao Mont (7/02)"],
+    ["tr-bru","Rennes → Paris (9/02) e Eurostar a Bruxelas (10/02)"],
+    ["tr-ams","Antuérpia (ou Bruxelas) → Amsterdã (15/02)"],
+    ["tr-paris","Amsterdã → Paris (20/02)"],
+    ["tr-voo","Confirmar aeroporto e horário do voo de volta"]]},
+  {g:"Passeios e reservas", when:"com antecedência", tasks:[
+    ["pa-abadia","Ingresso da abadia e tabela de marés"],
+    ["pa-vangogh","Van Gogh: reservar horário 5–6 semanas antes (€27)"],
+    ["pa-rijks","Rijksmuseum: reservar horário (€27)"],
+    ["pa-orsay","Museu d'Orsay ou cruzeiro no Sena (9/02)"],
+    ["pa-annefrank","Casa de Anne Frank, se quiserem (só online)"],
+    ["pa-zaanse","Zaanse Schans: ver quais moinhos abrem em fevereiro"],
+    ["pa-kinderdijk","Kinderdijk: horário do waterbus no inverno (19/02)"],
+    ["pa-jantar","Jantar de Dia dos Namorados em Bruges (14/02)"]]},
+  {g:"Mala", when:"última semana", tasks:[
+    ["ma-casacos","Casacos de inverno e roupas em camadas"],
+    ["ma-sapatos","Calçados confortáveis e impermeáveis"],
+    ["ma-adaptador","Adaptador de tomada europeu"],
+    ["ma-offline","Mapas e bilhetes baixados no celular"],
+    ["ma-tempo","Previsão do tempo de cada cidade"],
+    ["ma-transporte","App da SNCB e da NS instalados no celular"]]}
+];
+const TOTAL = CHECKLIST.reduce((n,g)=>n+g.tasks.length,0);
+const state = {};       // id -> true/false
+let db = null;
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+
+const CSUM = {"França":"4 noites · Paris, Mont Saint-Michel e Paris de novo","Bélgica":"5 noites · Bruxelas, Ghent e Bruges",
+  "Holanda":"5 noites · Amsterdã, Zaanse Schans, Haarlem, Rotterdam e Kinderdijk","Retorno":"1 noite em Paris e o voo para casa"};
+function dayCard(d){
+  const [wd,dm]=d.d.split(" "); const dn=dm.split("/")[0];
+  return `<article class="card">
+    <div class="stub" aria-label="${esc(d.d)}"><span class="wd">${esc(wd)}</span><span class="dn">${esc(dn)}</span><span class="mo">FEV</span></div>
+    <div class="cbody">
+      <h3>${esc(d.t)}</h3>
+      ${d.move?`<p class="move"><b>Como ir</b><span>${esc(d.move)}</span></p>`:""}
+      <dl class="blocks">${d.blocks.map(([p,x])=>`<dt>${esc(p)}</dt><dd>${esc(x)}</dd>`).join("")}</dl>
+      ${(d.eat||d.sleep)?`<div class="meta">${d.eat?`<div><span>Para provar</span>${esc(d.eat)}</div>`:""}${d.sleep?`<div><span>Onde dormir</span>${esc(d.sleep)}</div>`:""}</div>`:""}
+      ${d.tip?`<p class="tip">${esc(d.tip)}</p>`:""}
+    </div></article>`;
+}
+function tripDays(){ const out=[]; ITINERARY.forEach(c=>c.days.forEach(d=>out.push({n:Number(d.d.split(" ")[1].split("/")[0]), d, c}))); return out; }
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+function renderToday(){
+  const el=document.getElementById("hoje"); if(!el) return;
+  const now=new Date(); now.setHours(0,0,0,0);
+  const start=new Date(2027,1,5), end=new Date(2027,1,21);
+  const days=tripDays();
+  const pending=[]; CHECKLIST.forEach(g=>g.tasks.forEach(([id,label])=>{ if(!state[id]) pending.push([id,label,g.g]); }));
+  const done=TOTAL-pending.length, pct=Math.round(done/TOTAL*100);
+  let chosen=0, total=0;
+  try{ total=STAYS.length; STAYS.forEach(st=>{ const ch=hotelState[st.id]&&hotelState[st.id].choice; if(ch && stayOptions(st).some(o=>o.id===ch)) chosen++; }); }catch(e){}
+  const install = "";
+  const taskTile = `<div class="tile"><h3>Próximas tarefas</h3>
+      <div class="minibar" aria-hidden="true"><span style="width:${pct}%"></span></div>
+      <span class="eyebrow">${done} de ${TOTAL} feitas</span>
+      <div class="tasks">${pending.slice(0,5).map(([id,label,g])=>`<label class="task" for="h-${id}">
+        <input type="checkbox" id="h-${id}" data-id="${id}"><span class="label">${esc(label)}<br><span class="eyebrow">${esc(g)}</span></span></label>`).join("")
+        || '<p class="empty">Tudo pronto. Boa viagem!</p>'}</div>
+      <button type="button" class="go" data-goto="checklist">Ver checklist completo</button></div>`;
+  const hotelTile = `<div class="tile"><h3>Hotéis</h3><span class="big">${chosen}/${total}</span>
+      <span class="eyebrow">paradas com hotel escolhido</span>
+      <button type="button" class="go" data-goto="hoteis">${chosen<total?"Escolher hotéis":"Ver hotéis"}</button></div>`;
+  let html="";
+  if(now<start){
+    const n=Math.round((start-now)/86400000);
+    const first=days.find(x=>x.n===6);
+    html=`<div class="today">
+      <div class="thead"><span class="eyebrow">Faltam ${n} ${n===1?"dia":"dias"} para o embarque</span><h2>Preparando a viagem</h2></div>
+      ${install}
+      <div class="tgrid">${taskTile}${hotelTile}</div>
+      <div class="thead"><span class="eyebrow">Primeiro dia</span></div>
+      ${first?`<div style="--c:var(${first.c.c})">${dayCard(first.d)}</div>`:""}
+    </div>`;
+  } else if(now<=end){
+    const n=now.getDate();
+    const td=days.find(x=>x.n===n), tm=days.find(x=>x.n===n+1);
+    html=`<div class="today">
+      <div class="thead"><span class="eyebrow">Hoje · ${n} de fevereiro</span><h2>${td?esc(td.d.t):"Dia do voo para Paris"}</h2></div>
+      ${install}
+      ${td?`<div style="--c:var(${td.c.c})">${dayCard(td.d)}</div>`:`<div class="tile"><p class="empty">Voo noturno de Fortaleza para Paris. Passaportes, seguro e cartões na bagagem de mão. Chegada amanhã às 10h30.</p></div>`}
+      ${tm?`<div class="tile next"><span class="eyebrow">Amanhã · ${tm.n} de fevereiro</span><b>${esc(tm.d.t)}</b>${tm.d.move?`<span>${esc(tm.d.move)}</span>`:""}</div>`:""}
+    </div>`;
+  } else {
+    html=`<div class="today"><div class="thead"><span class="eyebrow">Viagem concluída</span><h2>Bem-vindos de volta</h2></div>
+      <p class="empty">O roteiro completo continua nas outras abas.</p></div>`;
+  }
+  el.innerHTML=html;
+}
+function renderItinerary(){
+  document.getElementById("roteiro").innerHTML = ITINERARY.map(c=>`
+    <div class="country" style="--c:var(${c.c})">
+      <div class="chead">
+        <div class="stampbox"><span class="sc">${esc(c.country)}</span><span class="sd">${esc(c.range)} 2027</span></div>
+        <div class="csum">${esc(CSUM[c.country]||"")}</div>
+      </div>
+      <ol class="days">${c.days.map(d=>`<li class="day">${dayCard(d)}</li>`).join("")}
+      </ol></div>`).join("");
+}
+function renderCountdown(){
+  const dep=new Date(2027,1,5), now=new Date(); now.setHours(0,0,0,0);
+  const n=Math.round((dep-now)/86400000);
+  document.getElementById("countdown").textContent = n>0 ? n : (n===0?"Hoje":"Boa viagem");
+}
+
+function renderChecklist(){
+  document.getElementById("groups").innerHTML = CHECKLIST.map(g=>{
+    const done = g.tasks.filter(([id])=>state[id]).length;
+    return `<div class="group"><h3>${esc(g.g)} <span>${done}/${g.tasks.length} · ${esc(g.when)}</span></h3>
+      ${g.tasks.map(([id,label])=>`<label class="task${state[id]?" on":""}" for="t-${id}">
+        <input type="checkbox" id="t-${id}" data-id="${id}"${state[id]?" checked":""}>
+        <span class="label">${esc(label)}</span></label>`).join("")}</div>`;
+  }).join("");
+  const n = Object.values(state).filter(Boolean).length;
+  const pct = Math.round(n/TOTAL*100);
+  document.getElementById("barfill").style.width = pct+"%";
+  document.querySelector(".bar").setAttribute("aria-valuenow",pct);
+  document.getElementById("count").textContent = `${n} de ${TOTAL} tarefas · ${pct}%`;
+  renderToday();
+}
+
+document.addEventListener("change", async e=>{
+  if(!e.target.closest || !e.target.closest("#groups, #hoje")) return;
+  const id = e.target.dataset && e.target.dataset.id; if(!id) return;
+  const val = e.target.checked;
+  state[id] = val; renderChecklist();
+  if(!db){ document.getElementById("sync").textContent = "Entrem com a conta Google para salvar as marcações."; return; }
+  try{ await db.collection("checks").doc(id).set({done:val, at:Date.now()}); }
+  catch(err){
+    document.getElementById("sync").textContent = "Não foi possível salvar. Confiram se entraram com a conta Google autorizada.";
+  }
+});
+
+const VIEWS=["hoje","roteiro","hoteis","checklist","trens","calendario"];
+function showView(v, scroll){
+  if(!VIEWS.includes(v)) v="hoje";
+  document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-selected", x.dataset.view===v?"true":"false"));
+  VIEWS.forEach(x=>document.getElementById(x).hidden = x!==v);
+  lsSet("europa2027-view", v);
+  if(scroll){ const t=document.querySelector(".bar-wrap"); if(t && t.getBoundingClientRect().top<0) t.scrollIntoView({block:"start"}); }
+}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view, true)));
+document.addEventListener("click", e=>{
+  const g=e.target.closest && e.target.closest("[data-goto]"); if(g){ showView(g.dataset.goto, true); return; }
+  if(e.target.id==="installok"){ lsSet("europa2027-install-ok","1"); const b=document.getElementById("installbox"); if(b) b.remove(); }
+});
+
+// ---------- calendário ----------
+const CAL_DEFAULT = {
+  5:["Fortaleza → Paris","Voo noturno","home"], 6:["Paris","Chegada 10h30, dia leve","fr"],
+  7:["Mont Saint-Michel","Trem a Rennes + ônibus","fr"], 8:["Mont Saint-Michel","Abadia, vila e marés","fr"],
+  9:["Paris","Orsay, Montmartre e Sena","fr"], 10:["Bruxelas","Eurostar e Grand-Place","be"],
+  11:["Bruxelas","Museus e Sablon","be"], 12:["Ghent","Bate-volta","be"], 13:["Bruges","Mudança e canais","be"],
+  14:["Bruges","Dia dos Namorados","be"], 15:["Antuérpia → Amsterdã","Dia de viagem","nl"],
+  16:["Amsterdã","Centro e canais","nl"], 17:["Amsterdã","Rijksmuseum e Van Gogh","nl"],
+  18:["Zaanse Schans","Moinhos + Haarlem","nl"], 19:["Rotterdam","Kinderdijk e Markthal","nl"],
+  20:["Paris","Trem de Amsterdã","home"], 21:["Paris → Fortaleza","Voo de volta","home"]
+};
+const COLORS = {fr:"--fr", be:"--be", nl:"--nl", home:"--home"};
+const calEdits = {};   // dia -> {city, plan, country}
+let calSel = null;
+function calDay(n){
+  const e = calEdits[n], d = CAL_DEFAULT[n];
+  if(e) return {city:e.city||"", plan:e.plan||"", country:e.country||"none", edited:true};
+  if(d) return {city:d[0], plan:d[1], country:d[2], edited:false};
+  return {city:"", plan:"", country:"none", edited:false};
+}
+function renderCal(){
+  const dows=["Seg","Ter","Qua","Qui","Sex","Sáb","Dom"];
+  let h = dows.map(x=>`<div class="dow" role="columnheader">${x}</div>`).join("");
+  // fevereiro de 2027 começa numa segunda-feira e tem 28 dias
+  for(let n=1;n<=28;n++){
+    const v=calDay(n), c=COLORS[v.country];
+    const trip = !!c;
+    h+=`<button type="button" class="cell${trip?" trip":" out"}" data-day="${n}" aria-pressed="${calSel===n}"${trip?` style="--c:var(${c})"`:""}
+      aria-label="${n} de fevereiro${v.city?": "+esc(v.city):""}">
+      <span class="num">${n}</span>${v.edited?'<span class="dot" title="Editado"></span>':""}
+      ${v.city?`<span class="city">${esc(v.city)}</span>`:""}${v.plan?`<span class="plan">${esc(v.plan)}</span>`:""}</button>`;
+  }
+  document.getElementById("cal").innerHTML=h;
+}
+function openEditor(n){
+  calSel=n; renderCal();
+  const v=calDay(n), ed=document.getElementById("editor");
+  ed.hidden=false;
+  document.getElementById("ed-title").textContent=`${n} de fevereiro`;
+  document.getElementById("ed-city").value=v.city;
+  document.getElementById("ed-plan").value=v.plan;
+  document.getElementById("ed-country").value=v.country;
+  document.getElementById("ed-flag").hidden=!v.edited;
+  document.getElementById("ed-msg").textContent="";
+  document.getElementById("ed-city").focus();
+}
+document.getElementById("cal").addEventListener("click",e=>{
+  const b=e.target.closest(".cell"); if(b) openEditor(Number(b.dataset.day));
+});
+document.getElementById("ed-cancel").addEventListener("click",()=>{
+  document.getElementById("editor").hidden=true; calSel=null; renderCal();
+});
+async function saveDay(n, val){
+  const msg=document.getElementById("ed-msg");
+  if(val) calEdits[n]=val; else delete calEdits[n];
+  renderCal(); document.getElementById("ed-flag").hidden=!calEdits[n];
+  if(!db){ msg.textContent="Entrem com a conta Google para salvar e compartilhar."; return; }
+  try{
+    const ref=db.collection("calendar").doc("d"+n);
+    if(val) await ref.set({...val, at:Date.now()}); else await ref.delete();
+    msg.textContent = val ? "Salvo para vocês dois." : "Dia voltou ao original.";
+  }catch(err){ msg.textContent="Não foi possível salvar. Confiram se entraram com a conta Google autorizada."; }
+}
+document.getElementById("editor").addEventListener("submit",e=>{
+  e.preventDefault(); if(calSel==null) return;
+  saveDay(calSel,{city:document.getElementById("ed-city").value.trim(),
+    plan:document.getElementById("ed-plan").value.trim(), country:document.getElementById("ed-country").value});
+});
+document.getElementById("ed-reset").addEventListener("click",()=>{
+  if(calSel==null) return; const n=calSel; saveDay(n,null).then(()=>openEditor(n));
+});
+
+// ---------- hotéis ----------
+const STAYS = [
+  {id:"paris1", city:"Paris", c:"--fr", dates:"6 fev · 1 noite", ci:"2027-02-06", co:"2027-02-07",
+   why:"Perto da Gare Montparnasse, de onde sai o trem para Rennes na manhã seguinte.",
+   opts:[
+    {id:"marianne", tier:"Opção de vocês", money:"€€€", name:"Hôtel Le Marianne", area:"11 Rue Paul Baudry, Paris 8e · metrô Franklin D. Roosevelt · 4★",
+     desc:"Hotel pequeno e de design, a poucos passos da Champs-Élysées, com quartos no estilo de apartamento parisiense. Fica a cerca de 25 min de metrô da Gare Montparnasse, com uma troca."},
+    {id:"raspail", tier:"Econômico", money:"€", name:"Hôtel Raspail Montparnasse", area:"Montparnasse · 3★",
+     desc:"Prédio art déco com 38 quartos e clima dos anos 1920, a poucos minutos a pé da estação."},
+    {id:"lem", tier:"Conforto", money:"€€", name:"Hôtel Le M", area:"A 100 m da Gare Montparnasse",
+     desc:"Quartos espaçosos e área de bem-estar. Ideal para sair a pé com as malas até o trem."},
+    {id:"victoria", tier:"Especial", money:"€€€", name:"Victoria Palace Hotel", area:"Saint-Germain / Montparnasse · 5★",
+     desc:"Hotel elegante de pé-direito alto, perto das lojas da Rue de Sèvres. Um começo de viagem caprichado."}]},
+  {id:"mont", city:"Mont Saint-Michel", c:"--fr", dates:"7–8 fev · 2 noites", ci:"2027-02-07", co:"2027-02-09",
+   why:"Em La Caserne, a área de hotéis no continente, a navete gratuita leva até o monte em poucos minutos. Dormir dentro das muralhas é a experiência mais marcante, mas tem escadas e menos conforto.",
+   opts:[
+    {id:"mercure", tier:"Opção de vocês", money:"€€", name:"Mercure Mont-Saint-Michel", area:"La Caserne · 5 min de navete ou 20 min a pé até o monte · 4★",
+     desc:"Hotel de rede confortável e bem localizado. Os quartos não têm vista para o monte, mas a cabeceira traz uma foto dele. Estacionamento pago."},
+    {id:"vert", tier:"Econômico", money:"€", name:"Hôtel Vert", area:"La Caserne · 2★",
+     desc:"Simples e bem localizado, perto da navete para o monte. A opção mais em conta."},
+    {id:"relais", tier:"Conforto", money:"€€", name:"Le Relais du Mont-Saint-Michel", area:"La Caserne, ao lado da barragem · 4★",
+     desc:"Alguns quartos têm varanda virada para o monte: peçam um desses ao reservar. Restaurante à noite."},
+    {id:"auberge", tier:"Especial", money:"€€€", name:"Auberge Saint-Pierre", area:"Dentro das muralhas do monte · 3★",
+     desc:"Casa em enxaimel do século XV com restaurante. Vocês dormem no monte e o veem vazio à noite. Nem todos os quartos dão para a baía."}]},
+  {id:"paris2", city:"Paris", c:"--fr", dates:"9 fev · 1 noite", ci:"2027-02-09", co:"2027-02-10",
+   why:"Perto da Gare du Nord, de onde sai o Eurostar para Bruxelas na manhã seguinte.",
+   opts:[
+    {id:"marianne", tier:"Opção de vocês", money:"€€€", name:"Hôtel Le Marianne", area:"11 Rue Paul Baudry, Paris 8e · metrô Franklin D. Roosevelt · 4★",
+     desc:"Hotel pequeno e de design, a poucos passos da Champs-Élysées, com quartos no estilo de apartamento parisiense. Fica a cerca de 25 min de metrô da Gare du Nord, com uma troca."},
+    {id:"ibisgdn", tier:"Econômico", money:"€", name:"Ibis Styles Paris Gare du Nord TGV", area:"A 2 min a pé da Gare du Nord · 3★",
+     desc:"Quartos reformados e lanchonete 24 horas. Prático para uma noite só."},
+    {id:"deuxgares", tier:"Conforto", money:"€€", name:"Hôtel Les Deux Gares", area:"A 300 m da Gare du Nord · 4★",
+     desc:"Quartos modernos, café, bar, academia e sauna, entre a Gare du Nord e a Gare de l'Est."},
+    {id:"25hours", tier:"Especial", money:"€€€", name:"25hours Hotel Terminus Nord", area:"Em frente à Gare du Nord · 4★",
+     desc:"Decoração colorida e divertida, bar badalado e vista para Montmartre.", price:"US$ 321"}]},
+  {id:"bru", city:"Bruxelas", c:"--be", dates:"10–12 fev · 3 noites", ci:"2027-02-10", co:"2027-02-13",
+   why:"No centro histórico, a pé da Grand-Place e da estação Bruxelas-Central, de onde saem os trens para Ghent e Bruges.",
+   opts:[
+    {id:"nhcoll", tier:"Opção de vocês", money:"€€", name:"NH Collection Brussels Centre", area:"Boulevard Adolphe Max 7 · a pé da Grand-Place",
+     desc:"Hotel reformado num prédio de estilo art déco, perto da Grand-Place e das principais ruas de compras."},
+    {id:"novotelbru", tier:"Opção de vocês", money:"€€", name:"Novotel Brussels City Centre", area:"Rue de la Vierge Noire 32 · bairro Sainte-Catherine",
+     desc:"A 200 m do metrô De Brouckère e a cerca de 10 min a pé da estação Bruxelas-Central. Perto dos restaurantes de Sainte-Catherine."},
+    {id:"ibisbru", tier:"Econômico", money:"€", name:"Ibis Brussels City Centre", area:"Centro, perto da Grand-Place",
+     desc:"Rede confiável, com bom isolamento acústico e cama confortável. Café da manhã à parte e bem avaliado."},
+    {id:"dix", tier:"Conforto", money:"€€", name:"Le Dixseptième", area:"A 2 min a pé da Grand-Place",
+     desc:"Casa elegante do século XVII com quartos históricos e modernos e café da manhã num pátio.", price:"US$ 193"},
+    {id:"amigo", tier:"Especial", money:"€€€", name:"Hotel Amigo", area:"Atrás da prefeitura, colado na Grand-Place · 5★",
+     desc:"O clássico de luxo de Bruxelas, com restaurante italiano premiado e concierge excelente.", price:"US$ 466"}]},
+  {id:"bruges", city:"Bruges", c:"--be", dates:"13–14 fev · 2 noites", ci:"2027-02-13", co:"2027-02-15",
+   why:"Dentro do anel de canais, para aproveitar a cidade vazia à noite. A noite do dia 14 é Dia dos Namorados: vale capricharem aqui.",
+   opts:[
+    {id:"martins", tier:"Econômico", money:"€", name:"Martin's Relais", area:"Canal Spiegelrei",
+     desc:"Cinco casas históricas à beira do canal, com quartos em alcova e banheiras de hidromassagem.", price:"US$ 157"},
+    {id:"swaene", tier:"Conforto", money:"€€", name:"Hotel Die Swaene", area:"Canal Groenerei, perto do Burg",
+     desc:"Hotel histórico premiado, com camas de dossel, spa e restaurante. Muito romântico.", price:"US$ 171"},
+    {id:"cruyce", tier:"Especial", money:"€€€", name:"Relais Bourgondisch Cruyce", area:"À beira do canal, no Rozenhoedkaai",
+     desc:"Boutique luxuoso no cartão-postal de Bruges, com restaurante e terraço sobre a água.", price:"US$ 263"}]},
+  {id:"ams", city:"Amsterdã", c:"--nl", dates:"15–19 fev · 5 noites", ci:"2027-02-15", co:"2027-02-20",
+   why:"No Jordaan ou no anel de canais: tudo a pé, com bonde para os museus e trem para os bate-voltas na Centraal.",
+   opts:[
+    {id:"monet", tier:"Opção de vocês", money:"€€€", name:"Monet Garden Hotel Amsterdam", area:"À beira do canal, perto de Waterlooplein",
+     desc:"Boutique calmo e muito bem avaliado, perto do Rembrandtplein e do mercado de Waterlooplein."},
+    {id:"ink", tier:"Opção de vocês", money:"€€", name:"INK Hotel Amsterdam – MGallery", area:"Nieuwezijds Voorburgwal 67 · 5 min a pé da Centraal e da Praça Dam · 4★",
+     desc:"Hotel premiado no antigo prédio de um jornal, com pátio interno. Prático para os trens dos bate-voltas.", price:"€164"},
+    {id:"parkplaza", tier:"Opção de vocês", money:"€€", name:"Park Plaza Victoria Amsterdam", area:"Damrak, em frente à estação Centraal · 4★",
+     desc:"Prédio histórico colado na estação: o mais prático para Antuérpia, Zaanse Schans, Haarlem e Rotterdam. A área é movimentada."},
+    {id:"wiechmann", tier:"Econômico", money:"€", name:"Amsterdam Wiechmann Hotel", area:"Prinsengracht, Jordaan",
+     desc:"Uma das poucas opções em conta do Jordaan, à beira do canal, com quartos de vários tamanhos."},
+    {id:"mrjordaan", tier:"Conforto", money:"€€", name:"Mr. Jordaan", area:"Jordaan, de frente para o canal",
+     desc:"Casa de canal com decoração moderna e minimalista, perto do centro.", price:"US$ 212"},
+    {id:"ambassade", tier:"Especial", money:"€€€", name:"Ambassade Hotel", area:"Herengracht, anel de canais",
+     desc:"Casas de canal elegantes, a maioria dos quartos com vista para a água, e um bar-biblioteca famoso."}]},
+  {id:"paris3", city:"Paris · aeroporto", c:"--home", dates:"20 fev · 1 noite", ci:"2027-02-20", co:"2027-02-21",
+   why:"Dormir no aeroporto evita qualquer correria no dia do voo. Confiram de qual terminal sai o voo de volta.",
+   opts:[
+    {id:"ibiscdg", tier:"Econômico", money:"€", name:"Ibis Styles Paris CDG Airport", area:"Em frente ao Terminal 3 · navete gratuita",
+     desc:"Áreas comuns coloridas e café da manhã a partir das 4h30, bom para voos cedo."},
+    {id:"pullman", tier:"Conforto", money:"€€", name:"Pullman Paris Roissy CDG", area:"A 1 min do trem entre os terminais · 4★",
+     desc:"Quartos amplos e área de bem-estar. Um último conforto antes do voo longo."},
+    {id:"sheraton", tier:"Especial", money:"€€€", name:"Sheraton Paris Roissy Airport", area:"Dentro do Terminal 2, a pé até o embarque · 4★",
+     desc:"O único hotel dentro do aeroporto, com quartos à prova de som. Do quarto ao check-in sem sair do prédio."}]}
+];
+const hotelState = {};     // stayId -> {choice}
+const hotelCustom = {};    // docId -> {stay, name, link}
+function bookingUrl(name, city, ci, co){
+  const q = encodeURIComponent(name+" "+city.replace(" · aeroporto",""));
+  return `https://www.booking.com/searchresults.html?ss=${q}&checkin=${ci}&checkout=${co}&group_adults=2&no_rooms=1`;
+}
+function mapsUrl(name, city){ return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(name+" "+city.replace(" · aeroporto"," Charles de Gaulle")); }
+function safeLink(u){ try{ const x=new URL(u); return (x.protocol==="https:"||x.protocol==="http:")?x.href:""; }catch(e){ return ""; } }
+function stayOptions(st){
+  const custom = Object.entries(hotelCustom).filter(([,v])=>v && v.stay===st.id)
+    .map(([k,v])=>({id:"c-"+k, docId:k, tier:"Sugestão de vocês", money:"", name:v.name, area:"", desc:"", link:safeLink(v.link||"")}));
+  return st.opts.concat(custom);
+}
+function renderHotels(){
+  setTimeout(renderToday,0);
+  let chosen=0;
+  document.getElementById("hpicks").innerHTML = STAYS.map(st=>{
+    const ch = hotelState[st.id] && hotelState[st.id].choice;
+    const o = ch ? stayOptions(st).find(x=>x.id===ch) : null;
+    if(o) chosen++;
+    return `<li style="--c:var(${st.c})"><span class="eyebrow">${esc(st.city)} · ${esc(st.dates)}</span>
+      <span class="pk${o?"":" none"}">${o?esc(o.name):"Ainda não escolhido"}</span></li>`;
+  }).join("");
+  document.getElementById("hcount").textContent = `${chosen}/${STAYS.length}`;
+  document.getElementById("hstays").innerHTML = STAYS.map(st=>{
+    const ch = hotelState[st.id] && hotelState[st.id].choice;
+    return `<section class="hstay" style="--c:var(${st.c})" aria-label="Hotéis em ${esc(st.city)}">
+      <div class="hhead">
+        <div class="stampbox"><span class="sc">${esc(st.city)}</span><span class="sd">${esc(st.dates)}</span></div>
+        <p class="why">${esc(st.why)}</p>
+      </div>
+      <div class="hgrid">${stayOptions(st).map(o=>{const on=ch===o.id; return `
+        <article class="hcard${on?" on":""}${o.tier==="Opção de vocês"?" mine":""}">
+          ${on?'<span class="hstampon">Escolhido</span>':""}
+          <div class="tier"><span>${esc(o.tier)}</span><span class="money">${esc(o.money)}</span></div>
+          <h4>${esc(o.name)}</h4>
+          ${o.area?`<span class="area">${esc(o.area)}</span>`:""}
+          ${o.desc?`<p>${esc(o.desc)}</p>`:""}
+          ${o.price?`<span class="price">A partir de <b>${esc(o.price)}</b> por noite</span>`:""}
+          <div class="hlinks">
+            ${o.link?`<a href="${esc(o.link)}" target="_blank" rel="noopener">Abrir link</a>`:""}
+            <a href="${bookingUrl(o.name, st.city, st.ci, st.co)}" target="_blank" rel="noopener">Preço nas datas</a>
+            <a href="${mapsUrl(o.name, st.city)}" target="_blank" rel="noopener">Ver no mapa</a>
+          </div>
+          <button type="button" class="hpick" data-stay="${st.id}" data-opt="${esc(o.id)}" aria-pressed="${on}">${on?"Escolhido ✓":"Escolher este"}</button>
+          ${o.docId?`<button type="button" class="hrm" data-rm="${esc(o.docId)}" data-stay="${st.id}">Remover sugestão</button>`:""}
+        </article>`;}).join("")}
+      </div>
+      <details class="hadd">
+        <summary>Adicionar outro hotel em ${esc(st.city)}</summary>
+        <form data-stay="${st.id}">
+          <label for="hn-${st.id}">Nome do hotel<input id="hn-${st.id}" name="name" maxlength="80" required autocomplete="off"></label>
+          <label for="hl-${st.id}">Link (opcional)<input id="hl-${st.id}" name="link" maxlength="500" inputmode="url" placeholder="https://" autocomplete="off"></label>
+          <button type="submit">Adicionar</button>
+        </form>
+        <span class="hmsg" id="hmsg-${st.id}" role="status"></span>
+      </details>
+    </section>`;}).join("");
+}
+function hotelLocalSave(){ try{ localStorage.setItem("europa2027-hotels", JSON.stringify({s:hotelState,c:hotelCustom})); }catch(e){} }
+document.getElementById("hstays").addEventListener("click", async e=>{
+  const pick = e.target.closest(".hpick");
+  const rm = e.target.closest(".hrm");
+  if(pick){
+    const stay=pick.dataset.stay, opt=pick.dataset.opt;
+    const cur = hotelState[stay] && hotelState[stay].choice;
+    const next = cur===opt ? null : opt;
+    hotelState[stay] = {choice: next}; renderHotels();
+    if(!db){ hotelLocalSave(); return; }
+    try{ await db.collection("hotels").doc(stay).set({choice: next, at: Date.now()}); }
+    catch(err){ const m=document.getElementById("hmsg-"+stay); if(m) m.textContent="Não foi possível salvar a escolha. Confiram se entraram com a conta Google autorizada."; }
+  }
+  if(rm){
+    const id=rm.dataset.rm, stay=rm.dataset.stay;
+    delete hotelCustom[id];
+    if(hotelState[stay] && hotelState[stay].choice==="c-"+id){ hotelState[stay]={choice:null}; if(db){ try{ await db.collection("hotels").doc(stay).set({choice:null, at:Date.now()}); }catch(e){} } }
+    renderHotels();
+    if(!db){ hotelLocalSave(); return; }
+    try{ await db.collection("hotelCustom").doc(id).delete(); }catch(err){}
+  }
+});
+document.getElementById("hstays").addEventListener("submit", async e=>{
+  const f = e.target.closest("form"); if(!f) return;
+  e.preventDefault();
+  const stay=f.dataset.stay, name=f.elements.name.value.trim(), raw=f.elements.link.value.trim();
+  const msg=document.getElementById("hmsg-"+stay);
+  if(!name){ msg.textContent="Escrevam o nome do hotel."; return; }
+  const link = raw ? safeLink(/^https?:\/\//i.test(raw)?raw:"https://"+raw) : "";
+  if(raw && !link){ msg.textContent="O link não parece válido. Confiram se começa com https://"; return; }
+  const id = "h"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  hotelCustom[id] = {stay, name, link};
+  renderHotels();
+  const m2=document.getElementById("hmsg-"+stay); if(m2) m2.textContent="Hotel adicionado.";
+  if(!db){ hotelLocalSave(); return; }
+  try{ await db.collection("hotelCustom").doc(id).set({stay, name, link, at:Date.now()}); }
+  catch(err){ delete hotelCustom[id]; renderHotels(); const m3=document.getElementById("hmsg-"+stay); if(m3) m3.textContent="Não foi possível salvar. Confiram se entraram com a conta Google autorizada."; }
+});
+
+renderItinerary(); renderChecklist(); renderCal(); renderCountdown(); renderHotels(); renderToday();
+showView(lsGet("europa2027-view")||"hoje", false);
+
+// A conexão com o Firebase (js/sync.js) entrega o banco quando a pessoa entra com o Google.
+const dbReady = new Promise(resolve => { window.__setTripDB = resolve; });
+if (window.__pendingTripDB) window.__setTripDB(window.__pendingTripDB);
+(async()=>{
+  const sync = document.getElementById("sync");
+  db = await dbReady;
+  sync.textContent = "Sincronizado com o casal";
+  db.collection("checks").onSnapshot(snap=>{
+    for(const k in state) delete state[k];
+    snap.docs.forEach(d=>{ const v=d.data(); if(v && v.done) state[d.id]=true; });
+    renderChecklist();
+  }, (err)=>{ sync.textContent = (err && err.code==="permission-denied")
+      ? "Esta conta Google não tem acesso. Incluam o e-mail nas regras do Firestore."
+      : "Sem conexão agora. As marcações são salvas e enviadas quando a internet voltar."; });
+  db.collection("calendar").onSnapshot(snap=>{
+    for(const k in calEdits) delete calEdits[k];
+    snap.docs.forEach(d=>{ const v=d.data(); const n=Number(d.id.slice(1)); if(v && n) calEdits[n]={city:v.city,plan:v.plan,country:v.country}; });
+    renderCal();
+  }, ()=>{});
+  db.collection("hotels").onSnapshot(snap=>{
+    for(const k in hotelState) delete hotelState[k];
+    snap.docs.forEach(d=>{ const v=d.data(); if(v) hotelState[d.id]={choice:v.choice||null}; });
+    renderHotels();
+  }, ()=>{});
+  db.collection("hotelCustom").onSnapshot(snap=>{
+    for(const k in hotelCustom) delete hotelCustom[k];
+    snap.docs.forEach(d=>{ const v=d.data(); if(v && v.stay && v.name) hotelCustom[d.id]={stay:String(v.stay),name:String(v.name),link:String(v.link||"")}; });
+    renderHotels();
+  }, ()=>{});
+})();
+</script>
+<script type="module" src="js/sync.js"></script>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+  }
+</script>
+</body>
+</html>
