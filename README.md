@@ -1,6 +1,12 @@
 # Europa a Dois 2027
 
-Roteiro da viagem de 5 a 21 de fevereiro de 2027 (Paris, Mont Saint-Michel, Bélgica e Holanda), com tela "Hoje", roteiro dia a dia, hotéis, checklist, trens e agenda editável.
+Roteiro da viagem de 5 a 21 de fevereiro de 2027 (Paris, Mont Saint-Michel, Bélgica e Holanda), com tela "Hoje", roteiro dia a dia com fotos, mapa da rota, hotéis, checklist, gastos, trens e agenda editável.
+
+Serviços externos usados (todos grátis e sem cadastro, chamados pelo navegador):
+- **Fotos:** API da Wikipédia + créditos do Wikimedia Commons.
+- **Mapa:** Leaflet com mapa base CARTO / OpenStreetMap.
+- **Tempo:** Open-Meteo (previsão até 16 dias; antes disso, média real de fevereiro 2022–2026).
+- **Cotação do euro:** Frankfurter (dados do Banco Central Europeu). Dá para definir a cotação manualmente na aba Gastos.
 
 - **Site:** GitHub Pages (só arquivos estáticos, sem servidor).
 - **Banco:** Firebase Firestore, com cache local para funcionar sem internet na viagem.
@@ -12,12 +18,13 @@ Roteiro da viagem de 5 a 21 de fevereiro de 2027 (Paris, Mont Saint-Michel, Bél
 |---|---|
 | `index.html` | A página inteira: visual, roteiro, hotéis, checklist e agenda |
 | `js/sync.js` | Login com Google e leitura/gravação no Firestore |
+| `js/extras.js` | Fotos, mapa, tempo e controle de gastos |
 | `js/firebase-config.js` | Configuração do projeto Firebase (**preencher**) |
 | `firestore.rules` | Regras de acesso do banco (**preencher os e-mails**) |
 | `sw.js` | Guarda a página no celular para abrir sem internet |
 | `manifest.webmanifest`, `icons/` | Nome e ícone na tela inicial do celular |
 
-Os dados ficam em `trips/europa-2027/` com as coleções `checks`, `calendar`, `hotels` e `hotelCustom`.
+Os dados ficam em `trips/europa-2027/` com as coleções `checks`, `calendar`, `hotels`, `hotelCustom`, `expenses` (gastos) e `settings` (orçamento).
 
 ## Passo a passo
 

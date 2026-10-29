@@ -1,12 +1,13 @@
 // Guarda a página no celular para abrir mesmo sem internet durante a viagem.
 // Os dados (checklist, hotéis, agenda) ficam no cache do Firestore, não aqui.
 // Ao publicar mudanças importantes, aumente o número da versão abaixo.
-const VERSION = "europa-a-dois-v1";
+const VERSION = "europa-a-dois-v2";
 const SHELL = [
   "./",
   "index.html",
   "manifest.webmanifest",
   "js/sync.js",
+  "js/extras.js",
   "js/firebase-config.js",
   "icons/icon-192.png",
   "icons/icon-512.png",
@@ -47,6 +48,8 @@ self.addEventListener("fetch", (event) => {
   // Arquivos da página, bibliotecas do Firebase e fontes: usa a cópia e atualiza em segundo plano.
   const cacheable = url.origin === self.location.origin
     || url.hostname === "www.gstatic.com"
+    || url.hostname === "cdnjs.cloudflare.com"
+    || url.hostname === "upload.wikimedia.org"
     || url.hostname === "fonts.googleapis.com"
     || url.hostname === "fonts.gstatic.com";
   if (!cacheable) return;

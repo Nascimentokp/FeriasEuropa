@@ -19,8 +19,7 @@ service cloud.firestore {
     match /trips/{tripId}/{colecao}/{docId} {
       allow read: if casal();
       allow write: if casal()
-        && colecao in ['checks', 'calendar', 'hotels', 'hotelCustom']
-        && (request.resource == null || request.resource.data.size() <= 10);
+        && colecao in ['checks', 'calendar', 'hotels', 'hotelCustom', 'expenses', 'settings'];
     }
   }
 }

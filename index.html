@@ -9,6 +9,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>html{-webkit-text-size-adjust:100%}*,*::before,*::after{box-sizing:border-box}:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
@@ -259,12 +260,118 @@ nav button svg{flex:none}
 .hmsg{font-size:.85rem;color:var(--muted);min-height:1.2em}
 .hnote{font-size:.85rem;color:var(--muted);margin:8px 0 0}
 @media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+
+/* ---------- fotos ---------- */
+.hero-photo{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .8s ease}
+.hero-photo.on{opacity:1}
+.hero .inner{z-index:1}
+.hero-credit{margin:0;font-size:.72rem;color:var(--hero-muted);min-height:1em}
+.hero-credit a{color:inherit}
+.dphoto{margin:-16px -18px 2px;position:relative;aspect-ratio:16/7;max-width:none;overflow:hidden;border-radius:0 12px 0 0;background:color-mix(in srgb,var(--c) 18%,var(--surface))}
+.dphoto img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .5s ease}
+.dphoto img.ok{opacity:1}
+.dphoto figcaption{position:absolute;right:0;bottom:0;left:0;padding:18px 10px 5px;font-size:.68rem;line-height:1.3;color:#fff;text-align:right;background:linear-gradient(to top,rgba(0,0,0,.6),transparent);overflow-wrap:anywhere}
+.dphoto figcaption a{color:#fff}
+.dtitle{display:flex;justify-content:space-between;align-items:baseline;gap:8px 12px;flex-wrap:wrap}
+.wxchip{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);min-width:0}
+.wxchip b{color:var(--ink);font-weight:500}
+@media (max-width:480px){.dphoto{margin:-16px -18px 2px}}
+
+/* ---------- mapa ---------- */
+.mapwrap{display:flex;flex-direction:column;gap:12px}
+.map{height:clamp(360px,62vh,640px);border-radius:12px;border:1px solid var(--line);background:var(--surface);z-index:0}
+.maplegend{display:flex;gap:14px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
+.maplegend span{display:inline-flex;align-items:center;gap:6px}
+.maplegend span::before{content:"";width:18px;height:4px;border-radius:2px;background:var(--c,var(--muted))}
+.maplegend .dash::before{background:repeating-linear-gradient(90deg,var(--muted) 0 4px,transparent 4px 7px)}
+.stops{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:8px}
+.stops li{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;cursor:pointer;min-width:0}
+.stops li:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.stops b{font-weight:600}
+.stops .h{font-size:.85rem;color:var(--muted);overflow-wrap:anywhere}
+.mapmsg{padding:24px;color:var(--muted)}
+.leaflet-container{font:inherit;background:var(--surface)}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--surface);color:var(--ink)}
+.leaflet-popup-content{margin:12px 14px;font-size:.9rem;line-height:1.4}
+.leaflet-popup-content b{font-family:var(--f-display);font-weight:400;font-size:1.1rem}
+.leaflet-container a.leaflet-popup-close-button{color:var(--muted)}
+.leaflet-control-attribution{font-size:.65rem}
+.pin{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--c);color:#fff;font-family:var(--f-mono);font-size:.75rem;font-weight:500;border:3px solid var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.pin.small{width:14px;height:14px;border-width:2px}
+
+/* ---------- tempo ---------- */
+.wxlist{display:flex;flex-direction:column;gap:6px}
+.wxrow{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:.92rem}
+.wxrow .t{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.wxrow small{grid-column:1/-1;color:var(--muted);font-size:.78rem}
+
+/* ---------- gastos ---------- */
+.gwrap{display:flex;flex-direction:column;gap:16px}
+.gtop{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+.gstat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.gstat .big{font-family:var(--f-display);font-size:2rem;line-height:1.1;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.gform{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px;align-items:end}
+.gform .wide{grid-column:1/-1}
+.gform label{display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:var(--muted)}
+.gform input,.gform select{font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;min-width:0;width:100%}
+.gbtn{font:inherit;font-weight:600;border:0;background:var(--accent);color:var(--surface);border-radius:6px;padding:10px 16px;cursor:pointer}
+.gbtn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.gform input:focus-visible,.gform select:focus-visible,.gbtn:focus-visible,.gdel:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.gmsg{font-size:.85rem;color:var(--muted);min-height:1.2em;margin:0}
+.gbars{display:flex;flex-direction:column;gap:8px}
+.gbar{display:grid;grid-template-columns:minmax(90px,140px) 1fr auto;gap:10px;align-items:center;font-size:.9rem}
+.gbar .track{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.gbar .track span{display:block;height:100%;background:var(--accent);border-radius:5px}
+.gbar .v{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:.85rem}
+.gcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
+.gpanel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.gpanel h3{font-size:1.15rem}
+.glist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.glist li{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:10px 0;border-top:1px dashed var(--line)}
+.glist li:first-child{border-top:0}
+.glist .d{font-weight:500;overflow-wrap:anywhere}
+.glist .m{font-size:.8rem;color:var(--muted)}
+.glist .a{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.glist .a small{display:block;color:var(--muted);font-size:.75rem}
+.gday{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:12px 0 2px}
+.gdel{font:inherit;font-size:.78rem;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0;justify-self:end}
+.gdel.sure{color:#C0392B;font-weight:600}
+.gbudget{display:flex;flex-direction:column;gap:6px}
+.gbudget .track{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.gbudget .track span{display:block;height:100%;background:var(--done)}
+.gbudget .track span.over{background:#C0392B}
+
+/* ---------- navegação Mais + transições ---------- */
+nav .more{display:none}
+.sheet{position:fixed;inset:0;z-index:30}
+.sheet-bg{position:absolute;inset:0;background:rgba(0,0,0,.4)}
+.sheet-panel{position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-radius:16px 16px 0 0;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:2px;box-shadow:0 -10px 30px rgba(0,0,0,.25)}
+.sheet-panel::before{content:"";width:40px;height:4px;border-radius:2px;background:var(--line);align-self:center;margin-bottom:8px}
+.sheet-panel button{font:inherit;font-size:1rem;font-weight:500;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);padding:14px 4px;cursor:pointer}
+.sheet-panel button:last-child{border-bottom:0}
+@media (max-width:720px){
+  nav{grid-template-columns:repeat(5,1fr)}
+  nav .sec{display:none}
+  nav .more{display:flex}
+}
+@keyframes fadeup{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.wrap > section:not([hidden]){animation:fadeup .28s ease}
+@media (prefers-reduced-motion:reduce){.wrap > section:not([hidden]){animation:none}.hero-photo,.dphoto img{transition:none}}
+
+@media (max-width:720px){
+  .progress{flex-wrap:nowrap;gap:8px}
+  .progress .bar{flex:0 0 70px}
+  .progress .count{white-space:nowrap;font-size:.78rem}
+  .sync{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .authbtn{flex:none;padding:4px 10px}
+}
 </style>
 </head>
 <body>
 
 
 <section class="hero gut">
+  <div class="hero-photo" id="herophoto" aria-hidden="true"></div>
   <div class="inner">
     <div>
       <div class="kicker">Roteiro de inverno · trem por 3 países</div>
@@ -292,6 +399,7 @@ nav button svg{flex:none}
         <span class="eyebrow">dias</span>
       </div>
     </div>
+    <p class="hero-credit" id="herocredit"></p>
   </div>
 </section>
 
@@ -313,10 +421,13 @@ nav button svg{flex:none}
     <nav role="tablist" aria-label="Seções">
       <button role="tab" id="tab-hoje" aria-selected="true" data-view="hoje"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>Hoje</span></button>
       <button role="tab" id="tab-roteiro" aria-selected="false" data-view="roteiro"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></svg><span>Roteiro</span></button>
+      <button role="tab" id="tab-mapa" aria-selected="false" data-view="mapa"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>Mapa</span></button>
       <button role="tab" id="tab-hoteis" aria-selected="false" data-view="hoteis"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20V8M3 14h18v6M21 20v-6a3 3 0 0 0-3-3h-7v3"/><circle cx="7" cy="11" r="2"/></svg><span>Hotéis</span></button>
-      <button role="tab" id="tab-checklist" aria-selected="false" data-view="checklist"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 9 2 2 4-4M8 15h8"/></svg><span>Checklist</span></button>
-      <button role="tab" id="tab-trens" aria-selected="false" data-view="trens"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M9 21l-2 0 2-4M15 21h2l-2-4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/></svg><span>Trens</span></button>
-      <button role="tab" id="tab-calendario" aria-selected="false" data-view="calendario"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Agenda</span></button>
+      <button role="tab" class="sec" id="tab-checklist" aria-selected="false" data-view="checklist"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 9 2 2 4-4M8 15h8"/></svg><span>Checklist</span></button>
+      <button role="tab" class="sec" id="tab-gastos" aria-selected="false" data-view="gastos"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></svg><span>Gastos</span></button>
+      <button role="tab" class="sec" id="tab-trens" aria-selected="false" data-view="trens"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M9 21l-2 0 2-4M15 21h2l-2-4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/></svg><span>Trens</span></button>
+      <button role="tab" class="sec" id="tab-calendario" aria-selected="false" data-view="calendario"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Agenda</span></button>
+      <button type="button" class="more" id="morebtn" aria-expanded="false" aria-controls="moresheet"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></svg><span>Mais</span></button>
     </nav>
     <div class="progress">
       <div class="bar" role="progressbar" aria-label="Progresso do checklist" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="barfill"></span></div>
@@ -326,7 +437,28 @@ nav button svg{flex:none}
     </div>
   </div>
 
+  <div class="sheet" id="moresheet" hidden>
+    <div class="sheet-bg" data-close="1"></div>
+    <div class="sheet-panel" role="dialog" aria-label="Mais seções">
+      <button type="button" data-goto="checklist">Checklist</button>
+      <button type="button" data-goto="gastos">Gastos</button>
+      <button type="button" data-goto="trens">Trens e dicas</button>
+      <button type="button" data-goto="calendario">Agenda do mês</button>
+    </div>
+  </div>
+
   <section id="hoje"></section>
+  <section id="mapa" hidden>
+    <div class="mapwrap">
+      <div class="thead"><span class="eyebrow">Rota completa · trem</span><h2>O mapa da viagem</h2></div>
+      <div id="map" class="map" role="region" aria-label="Mapa da rota"></div>
+      <div class="maplegend">
+        <span style="--c:var(--fr)">França</span><span style="--c:var(--be)">Bélgica</span><span style="--c:var(--nl)">Holanda</span><span class="dash">Bate-volta</span>
+      </div>
+      <ol class="stops" id="stops"></ol>
+    </div>
+  </section>
+  <section id="gastos" hidden></section>
   <section id="roteiro" hidden></section>
   <section id="hoteis" hidden>
     <div class="hwrap">
@@ -588,7 +720,8 @@ function dayCard(d){
   return `<article class="card">
     <div class="stub" aria-label="${esc(d.d)}"><span class="wd">${esc(wd)}</span><span class="dn">${esc(dn)}</span><span class="mo">FEV</span></div>
     <div class="cbody">
-      <h3>${esc(d.t)}</h3>
+      <figure class="dphoto" data-day="${dn}" hidden></figure>
+      <div class="dtitle"><h3>${esc(d.t)}</h3><span class="wxchip" data-day="${dn}"></span></div>
       ${d.move?`<p class="move"><b>Como ir</b><span>${esc(d.move)}</span></p>`:""}
       <dl class="blocks">${d.blocks.map(([p,x])=>`<dt>${esc(p)}</dt><dd>${esc(x)}</dd>`).join("")}</dl>
       ${(d.eat||d.sleep)?`<div class="meta">${d.eat?`<div><span>Para provar</span>${esc(d.eat)}</div>`:""}${d.sleep?`<div><span>Onde dormir</span>${esc(d.sleep)}</div>`:""}</div>`:""}
@@ -625,7 +758,7 @@ function renderToday(){
     html=`<div class="today">
       <div class="thead"><span class="eyebrow">Faltam ${n} ${n===1?"dia":"dias"} para o embarque</span><h2>Preparando a viagem</h2></div>
       ${install}
-      <div class="tgrid">${taskTile}${hotelTile}</div>
+      <div class="tgrid">${taskTile}${hotelTile}<div class="tile" id="wxtoday"><h3>Tempo</h3><p class="empty">Carregando…</p></div></div>
       <div class="thead"><span class="eyebrow">Primeiro dia</span></div>
       ${first?`<div style="--c:var(${first.c.c})">${dayCard(first.d)}</div>`:""}
     </div>`;
@@ -643,6 +776,7 @@ function renderToday(){
       <p class="empty">O roteiro completo continua nas outras abas.</p></div>`;
   }
   el.innerHTML=html;
+  if(typeof window.afterRender==="function") window.afterRender();
 }
 function renderItinerary(){
   document.getElementById("roteiro").innerHTML = ITINERARY.map(c=>`
@@ -653,6 +787,7 @@ function renderItinerary(){
       </div>
       <ol class="days">${c.days.map(d=>`<li class="day">${dayCard(d)}</li>`).join("")}
       </ol></div>`).join("");
+  if(typeof window.afterRender==="function") window.afterRender();
 }
 function renderCountdown(){
   const dep=new Date(2027,1,5), now=new Date(); now.setHours(0,0,0,0);
@@ -688,12 +823,16 @@ document.addEventListener("change", async e=>{
   }
 });
 
-const VIEWS=["hoje","roteiro","hoteis","checklist","trens","calendario"];
+const VIEWS=["hoje","roteiro","mapa","hoteis","checklist","gastos","trens","calendario"];
+const SECONDARY=["checklist","gastos","trens","calendario"];
 function showView(v, scroll){
   if(!VIEWS.includes(v)) v="hoje";
   document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-selected", x.dataset.view===v?"true":"false"));
   VIEWS.forEach(x=>document.getElementById(x).hidden = x!==v);
   lsSet("europa2027-view", v);
+  const mb=document.getElementById("morebtn"); if(mb) mb.setAttribute("aria-selected", SECONDARY.includes(v)?"true":"false");
+  const sh=document.getElementById("moresheet"); if(sh){ sh.hidden=true; if(mb) mb.setAttribute("aria-expanded","false"); }
+  if(typeof window.onViewShown==="function") window.onViewShown(v);
   if(scroll){ const t=document.querySelector(".bar-wrap"); if(t && t.getBoundingClientRect().top<0) t.scrollIntoView({block:"start"}); }
 }
 document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view, true)));
@@ -988,6 +1127,8 @@ if (window.__pendingTripDB) window.__setTripDB(window.__pendingTripDB);
   }, ()=>{});
 })();
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="js/extras.js"></script>
 <script type="module" src="js/sync.js"></script>
 <script>
   if ("serviceWorker" in navigator) {

@@ -68,6 +68,7 @@ if (!firebaseConfig.apiKey || firebaseConfig.apiKey.startsWith("COLE")) {
       authBtn.textContent = "Sair";
       authBtn.title = user.email || "";
       say(`Sincronizado com o casal · ${user.email || ""}`);
+      window.__tripUser = { email: user.email || "", name: (user.displayName || user.email || "").split(" ")[0] };
       if (!handed) { handed = true; handOver(adapter); }
     } else {
       authBtn.textContent = "Entrar com Google";
